@@ -1,3 +1,13 @@
+# Confidential Test Data - Company Information
+Test Files/
+**/Test Files/
+test_data/
+confidential/
+*.ledger
+*Ledger*.pdf
+*SOA*.pdf
+*Statement*.pdf
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
