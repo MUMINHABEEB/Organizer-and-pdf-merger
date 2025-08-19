@@ -156,15 +156,21 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ github.ref_name }}
-        release_name: AI Automation Suite ${{ github.ref_name }}
+        release_name: AI Automation Suite - Organizer and PDF Merger ${{ github.ref_name }}
         body: |
-          ## 🚀 AI Automation Suite ${{ github.ref_name }}
+          ## 🚀 AI Automation Suite - Organizer and PDF Merger ${{ github.ref_name }}
           
           ### 📦 Downloads
           
-          - **Recommended**: `AI_Automation_Suite_Setup.exe` - Professional installer with automatic WebView2 installation
-          - **Portable**: `AI_Automation_Suite_OneFile.exe` - Single-file executable (requires manual WebView2 installation)
-          - **Standard**: `AI_Automation_Suite.exe` - Multi-file distribution
+          - **🏢 Recommended**: `AI_Automation_Suite_Setup.exe` - Professional installer with automatic WebView2 installation
+          - **📱 Portable**: `AI_Automation_Suite_OneFile.exe` - Single-file executable (requires manual WebView2 installation)
+          - **🔧 Standard**: `AI_Automation_Suite.exe` - Multi-file distribution for development
+          
+          ### ✨ Features
+          - Smart file organization and automation
+          - PDF merging and management tools
+          - Modern web-based interface with Ramidos branding
+          - Automatic update checking
           
           ### 📋 System Requirements
           - Windows 10/11
@@ -172,6 +178,9 @@ jobs:
           
           ### 🔍 Verification
           Download `checksums.txt` to verify file integrity using SHA256.
+          
+          ### 📝 Installation Guide
+          See the [README](https://github.com/MUMINHABEEB/Organizer-and-pdf-merger#-installation-guide) for detailed installation instructions.
           
           ### 📝 Changes
           See commit history for detailed changes.
