@@ -1,0 +1,365 @@
+﻿<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <LastAuthor>RAMIDOS GLOBSL LOGISTIC FZCO</LastAuthor>
+  <LastSaved>2025-07-16T06:48:20Z</LastSaved>
+  <Version>16.00</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <Colors>
+   <Color>
+    <Index>2</Index>
+    <RGB>#154A93</RGB>
+   </Color>
+   <Color>
+    <Index>3</Index>
+    <RGB>#000000</RGB>
+   </Color>
+   <Color>
+    <Index>4</Index>
+    <RGB>#ECF4FF</RGB>
+   </Color>
+  </Colors>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>7785</WindowHeight>
+  <WindowWidth>21360</WindowWidth>
+  <WindowTopX>32767</WindowTopX>
+  <WindowTopY>32767</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s62">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Tahoma" ss:Size="12" ss:Color="#333399"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s63">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Tahoma" ss:Size="12" ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s64">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Tahoma" ss:Size="12" ss:Color="#000000"/>
+   <Interior ss:Color="#ECF4FF" ss:Pattern="Solid"/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Sheet1">
+  <Table ss:ExpandedColumnCount="13" ss:ExpandedRowCount="18" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultRowHeight="15">
+   <Column ss:Width="75" ss:Span="1" ss:AutoFit="0"/>
+   <Column ss:Index="3" ss:AutoFitWidth="0" ss:Width="142.5" ss:AutoFit="0"/>
+   <Column ss:AutoFitWidth="0" ss:Width="174" ss:AutoFit="0"/>
+   <Column ss:AutoFitWidth="0" ss:Width="124.5" ss:AutoFit="0"/>
+   <Column ss:Width="75" ss:Span="7" ss:AutoFit="0"/>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Bank ID</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Bank Code</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Bank En Name</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Bank Ar Name</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Account Number</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Currency ID</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Phone</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Mobile</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Phone3</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">E_mail</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">WebSite</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Address</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Bank Contact Person</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">1015</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">Calogi</Data></Cell>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">1016</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">2</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">ADCB/ ABDELRHMAN BARAKAT </Data></Cell>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">1017</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">3</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">WIO BANK </Data></Cell>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">1018</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">4</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">ADCB (AED)</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">Abu Dhabi Commercial Bank</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">13382464920002</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">1020</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">5</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">National Bank of Fujairah</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">National Bank of Fujairah</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">012685422512</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">1021</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">6</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">XXXX XXXX XXXX 9757</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">XXXX XXXX XXXX 9757</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">1022</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">7</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">XXXX XXXX XXXX 8653</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">XXXX XXXX XXXX 8653</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">XXXX XXXX XXXX 8653</Data></Cell>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">1023</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">8</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">XXXX XXXX XXXX 7343</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">XXXX XXXX XXXX 7343</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">XXXX XXXX XXXX 7343</Data></Cell>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">1024</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">9</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">XXXX XXXX XXXX 6828</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">XXXX XXXX XXXX 6828</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">XXXX XXXX XXXX 6828</Data></Cell>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">1025</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">10</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">XXXX XXXX XXXX 4112</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">XXXX XXXX XXXX 4112</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">1026</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">11</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">XXXX XXXX XXXX 8832</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">XXXX XXXX XXXX 8832</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">XXXX XXXX XXXX 8832</Data></Cell>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">1027</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">12</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">XXXX XXXX XXXX 7678</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">XXXX XXXX XXXX 7678</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">XXXX XXXX XXXX 7678</Data></Cell>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">1028</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">13</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">XXXX XXXX XXXX 0467</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">XXXX XXXX XXXX 0467</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">XXXX XXXX XXXX 0467</Data></Cell>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">1029</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">14</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">XXXX XXXX XXXX 8137</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">XXXX XXXX XXXX 8137</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">XXXX XXXX XXXX 8137</Data></Cell>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">1030</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">15</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">XXXX XXXX XXXX 8385</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">XXXX XXXX XXXX 8385</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">XXXX XXXX XXXX 8385</Data></Cell>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">1031</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">16</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">XXXX XXXX XXXX 2930</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">XXXX XXXX XXXX 2930</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s64"/>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s63"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String"></Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Selected/>
+   <LeftColumnVisible>3</LeftColumnVisible>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>16</ActiveRow>
+     <ActiveCol>5</ActiveCol>
+     <RangeSelection>R1C1:R17C6</RangeSelection>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>

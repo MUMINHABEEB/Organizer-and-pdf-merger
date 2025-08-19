@@ -1,0 +1,190 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number (e.g., 1.0.1)'
+        required: true
+        default: '1.0.1'
+      release_notes:
+        description: 'Release notes'
+        required: false
+        default: 'New release'
+
+env:
+  NODE_VERSION: '18'
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+    
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Install Node dependencies
+      working-directory: frontend
+      run: npm install
+    
+    - name: Build frontend
+      working-directory: frontend
+      run: npm run build
+    
+    - name: Update version
+      if: github.event_name == 'workflow_dispatch'
+      run: |
+        $version = "${{ github.event.inputs.version }}"
+        Write-Host "Updating version to $version"
+        
+        # Update version.py
+        $versionContent = "__version__ = `"$version`""
+        Set-Content -Path "src/version.py" -Value $versionContent
+        
+        # Update pyproject.toml
+        $pyprojectContent = Get-Content "pyproject.toml" -Raw
+        $pyprojectContent = $pyprojectContent -replace 'version = "[\d\.]+"', "version = `"$version`""
+        Set-Content -Path "pyproject.toml" -Value $pyprojectContent
+        
+        # Update package.json
+        $packageJson = Get-Content "frontend/package.json" -Raw | ConvertFrom-Json
+        $packageJson.version = $version
+        $packageJson | ConvertTo-Json -Depth 100 | Set-Content "frontend/package.json"
+      shell: powershell
+    
+    - name: Build standard executable
+      run: |
+        Write-Host "Building standard executable..."
+        pyinstaller pyinstaller.spec --clean --noconfirm
+      shell: powershell
+    
+    - name: Build onefile executable
+      run: |
+        Write-Host "Building onefile executable..."
+        pyinstaller pyinstaller_onefile.spec --clean --noconfirm
+      shell: powershell
+    
+    - name: Install Inno Setup
+      run: |
+        Write-Host "Installing Inno Setup..."
+        choco install innosetup -y
+        echo "C:\Program Files (x86)\Inno Setup 6" >> $env:GITHUB_PATH
+      shell: powershell
+    
+    - name: Build installer
+      run: |
+        Write-Host "Building installer..."
+        & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" INSTALLER_InnoSetup.iss
+      shell: powershell
+    
+    - name: Create release directory
+      run: |
+        $version = if ("${{ github.event_name }}" -eq "workflow_dispatch") { "${{ github.event.inputs.version }}" } else { "${{ github.ref_name }}" -replace "^v", "" }
+        $releaseDir = "releases/v$version"
+        
+        Write-Host "Creating release directory: $releaseDir"
+        New-Item -ItemType Directory -Path $releaseDir -Force
+        
+        # Copy built files
+        Copy-Item "dist/AI_Automation_Suite.exe" "$releaseDir/"
+        Copy-Item "dist/AI_Automation_Suite_OneFile.exe" "$releaseDir/"
+        Copy-Item "installer_output/AI_Automation_Suite_Setup.exe" "$releaseDir/"
+        
+        # Create checksums
+        $files = @(
+            "$releaseDir/AI_Automation_Suite.exe",
+            "$releaseDir/AI_Automation_Suite_OneFile.exe", 
+            "$releaseDir/AI_Automation_Suite_Setup.exe"
+        )
+        
+        $checksums = @()
+        foreach ($file in $files) {
+            $hash = Get-FileHash $file -Algorithm SHA256
+            $filename = Split-Path $file -Leaf
+            $checksums += "$($hash.Hash.ToLower())  $filename"
+        }
+        
+        $checksums -join "`n" | Set-Content "$releaseDir/checksums.txt"
+        
+        # Create release info
+        $releaseInfo = @{
+            version = "v$version"
+            build_date = (Get-Date -Format "yyyy-MM-dd HH:mm:ss UTC")
+            python_version = "${{ env.PYTHON_VERSION }}"
+            node_version = "${{ env.NODE_VERSION }}"
+            files = @(
+                @{ name = "AI_Automation_Suite_Setup.exe"; description = "Professional installer with WebView2 runtime"; size = (Get-Item "$releaseDir/AI_Automation_Suite_Setup.exe").Length }
+                @{ name = "AI_Automation_Suite.exe"; description = "Standard executable (requires manual WebView2 installation)"; size = (Get-Item "$releaseDir/AI_Automation_Suite.exe").Length }
+                @{ name = "AI_Automation_Suite_OneFile.exe"; description = "Portable single-file executable"; size = (Get-Item "$releaseDir/AI_Automation_Suite_OneFile.exe").Length }
+            )
+        } | ConvertTo-Json -Depth 10
+        
+        Set-Content "$releaseDir/release_info.json" $releaseInfo
+        
+        Write-Host "Release package created in $releaseDir"
+        Get-ChildItem $releaseDir | Format-Table Name, Length
+      shell: powershell
+    
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: release-artifacts
+        path: releases/
+    
+    - name: Create Release
+      if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref_name }}
+        release_name: AI Automation Suite ${{ github.ref_name }}
+        body: |
+          ## 🚀 AI Automation Suite ${{ github.ref_name }}
+          
+          ### 📦 Downloads
+          
+          - **Recommended**: `AI_Automation_Suite_Setup.exe` - Professional installer with automatic WebView2 installation
+          - **Portable**: `AI_Automation_Suite_OneFile.exe` - Single-file executable (requires manual WebView2 installation)
+          - **Standard**: `AI_Automation_Suite.exe` - Multi-file distribution
+          
+          ### 📋 System Requirements
+          - Windows 10/11
+          - WebView2 Runtime (auto-installed with setup.exe)
+          
+          ### 🔍 Verification
+          Download `checksums.txt` to verify file integrity using SHA256.
+          
+          ### 📝 Changes
+          See commit history for detailed changes.
+        draft: false
+        prerelease: false
+        
+    - name: Upload Release Assets
+      if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: releases/${{ github.ref_name }}/
+        asset_name: ai-automation-suite-${{ github.ref_name }}-windows.zip
+        asset_content_type: application/zip

@@ -1,0 +1,21 @@
+[tool]
+name = "ai-automation-suite"
+version = "0.1.0"
+description = "A suite of AI tools for file naming, folder organization, and PDF management."
+authors = ["Your Name <your.email@example.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+tkinter = "*"
+numpy = "*"
+pandas = "*"
+PyPDF2 = "*"
+pytest = { version = "*", optional = true }
+
+[tool.poetry.dev-dependencies]
+pytest = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

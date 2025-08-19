@@ -1,0 +1,242 @@
+AI AUTOMATION SUITE – A–Z HANDOFF PLAN (PLAIN TEXT)
+=================================================
+
+Last updated: 2025-08-15
+
+SECTION A. CURRENT STATE SNAPSHOT
+- Python services: organizer (folder operations), PDF merge logic.
+- Legacy PyQt GUI still present (to be deprecated).
+- New PyWebview GUI (index.html + main.js) partially implemented (Organizer, PDF Merge shell).
+- Tests exist; coverage moderate (<30%). Organizer logic not fully covered.
+- Packaging: PyInstaller legacy exe working; WebView exe work-in-progress.
+
+SECTION B. PRIMARY GOALS
+1. Ship stable PyWebview-based desktop UI (.exe) with Organizer + Advanced PDF Merge + Settings.
+2. 100% local operation (no external HTTP server unless later chosen).
+3. Clean, headless-testable service layer (no GUI imports).
+4. Automation scripts for build, test, package, version bump.
+5. Complete developer + agent documentation for autonomous continuation.
+
+SECTION C. ARCHITECTURE OVERVIEW
+- Single Python process; pywebview window (Edge WebView2 preferred; Qt as fallback).
+- JS <-> Python via pywebview js_api (JSON only, no DOM manip from Python).
+- Long tasks (organize) run in background threads; poll via last_result().
+- Settings persisted as JSON under user config dir (AppData on Windows).
+
+SECTION D. SERVICE LAYER HARDENING STEPS
+1. Keep folder organizer logic isolated (services/folder_organizer.py) – no GUI side effects on import.
+2. Expose pure function run_organize(path, dry_run, scheme) -> dict with keys: moved, copied_only, skipped, errors, total, details? (list), dry_run.
+3. Implement merge_pdfs(files, output_path) raising controlled exceptions; never silently swallow.
+4. Validation helpers: ensure path exists, destination writable, at least 2 PDFs for merge.
+5. Normalize result dict (always includes all numeric keys even if zero).
+6. Add unit tests covering success + error branches.
+
+SECTION E. JS_API SPEC (STABLE CONTRACT)
+Methods (all return JSON-serializable dicts):
+  ping() -> { ok: true, time }
+  organize(path, dry_run: bool, scheme: str) -> { status: "started" } (spawns thread or { error })
+  last_result() -> { ...result } | null
+  merge_pdfs(files: list[str], output_path: str|null) -> { status: "ok", output } | { error }
+  pick_pdfs() -> { files: [ ... ] } | { error }
+  pick_save_pdf(default_name) -> { output: str|null } | { error }
+  load_settings() -> settings dict
+  save_settings(settings dict) -> { ok: bool } | { error }
+  app_info() -> { version, build_time, backend_used }
+Optional future: open_path(path), tail_log(lines=200)
+
+SECTION F. FRONTEND FEATURE PLAN
+1. Shell + tabs (DONE partial).
+2. Organizer enhancements:
+   - Dry run triggers thread; poll every 600ms.
+   - Detailed table (limit e.g. 50 entries) + Raw JSON toggle.
+   - Commit button enabled only if dry run succeeded (no errors, operations >0).
+3. PDF Merge advanced:
+   - Add, remove, remove all, reorder (Up/Down), merge with save dialog.
+   - Success message + optional open file.
+4. Settings panel:
+   - Fields: last_folder, preferred_scheme, theme, auto_open_merged.
+   - Load on startup; save (debounced 400ms) on change.
+5. About panel: version, build timestamp, backend, license summary.
+6. Visual polish: accent variable, consistent spacing, toasts for errors, spinner or status text.
+7. Accessibility: keyboard focus ring, aria labels minimal (future pass).
+
+SECTION G. FRONTEND TECH DETAILS
+- Plain (vanilla) JS for simplicity; defer framework until complexity warrants.
+- main.js can later modularize (ES modules) if size grows.
+- Use pywebviewready event before calling API.
+- Escape dynamic HTML (utility escapeHtml) before injecting.
+- Avoid blocking loops; rely on poll schedule.
+
+SECTION H. TARGET DIRECTORY STRUCTURE
+a-automation-suite/
+  src/
+    services/
+    web/ (index.html, main.js, assets/...)
+    webview_bootstrap.py
+    legacy_pyqt/ (to remove later)
+  tests/
+  scripts/ (build_webview.ps1, build_legacy.ps1, etc.)
+  pyinstaller.spec (web build variant or separate spec)
+  requirements.txt / pyproject.toml
+  VERSION
+  README.md
+  CHANGELOG.md
+  docs/ (ARCHITECTURE.md, API_DOCS.md, SETTINGS.md, DEPLOY.md)
+
+SECTION I. SETTINGS PERSISTENCE
+File: %APPDATA%/AI_Automation_Suite/settings.json
+Keys: last_folder, preferred_scheme, theme, auto_open_merged, version_seen.
+Helper functions load_settings()/save_settings(settings).
+Frontend loads once on pywebviewready, applies defaults if missing, saves on change (debounced).
+
+SECTION J. THREADING MODEL
+- Single active organize thread at a time. If busy → return { error: "busy" }.
+- Store thread handle + mutable result container.
+- last_result returns shallow copy (or deep copy) to avoid mutation from JS.
+- PDF merge synchronous (fast); if large (n > threshold), optionally thread.
+
+SECTION K. LOGGING STRATEGY
+- Standard print lines prefixed: [app] <component>: message
+- Optional rotating file log at %APPDATA%/AI_Automation_Suite/logs/app.log (size cap, simple rollover).
+- API tail_log(lines) returns last N lines for UI diagnostics.
+
+SECTION L. ERROR HANDLING
+- All API entrypoints wrapped try/except; structured { error, trace? } (trace only if debug flag enabled).
+- Validate all inputs early; never raise raw exceptions to UI.
+- Provide stable error messages (avoid environment-specific noise).
+
+SECTION M. ORGANIZER ENHANCEMENTS
+- details: list[{ action, src, dest?, error? }]
+- first_errors: subset of earliest errors (for quick view)
+- skipped_all: bool if nothing actionable.
+- Collect detailed list only for dry run (optional toggle for commit mode for performance).
+- Commit may re-run scan (document difference) or reuse dry run plan (safer to re-scan if external changes likely; trade-off).
+
+SECTION N. PDF MERGE ADVANCED (FUTURE)
+- Drag-and-drop file area.
+- Duplicate detection (skip & highlight).
+- Total size display + progress (if large).
+- auto_open_merged setting triggers open_path.
+- Better error surfacing (list per file failures if partial allowed — currently all-or-nothing).
+
+SECTION O. SECURITY / SAFETY
+- Restrict file operations to local filesystem (no network share logic by default).
+- Sanitize JSON (strip control chars if logging user input).
+- Do not expose arbitrary Python execution endpoints.
+- Optional: path allowlist / denylist patterns.
+
+SECTION P. TESTING STRATEGY
+Unit Tests (services):
+  - organize: empty dir → zeros
+  - organize: sample files → moved counts
+  - organize: invalid path → error
+  - merge_pdfs: two temp PDFs merged successfully
+  - merge_pdfs: invalid file list
+  - settings: load/save roundtrip
+API Tests:
+  - instantiate Api (without pywebview window) for non-dialog methods
+  - concurrency busy scenario
+Coverage Goals: 60% baseline, 80% stretch (services >90%).
+UI Automation (optional later): Playwright or pywinauto smoke flows.
+
+SECTION Q. COVERAGE IMPROVEMENT STEPS
+1. Add tests for each error branch (invalid inputs, busy state, missing PdfMerger).
+2. Parameterize scheme variations.
+3. Add test ensuring result dict keys always present.
+4. Add regression test for previously fixed bugs (as they appear).
+
+SECTION R. BUILD & PACKAGING (build_webview.ps1 outline)
+1. Clean old build/dist (optional flags).
+2. Verify presence of src/web/index.html + main.js.
+3. PyInstaller command (onedir initial):
+   pyinstaller --noconfirm --name AI_Automation_Suite_Web \
+     --add-data "src/web;web" \
+     --exclude-module tkinter \
+     src/webview_bootstrap.py
+4. Inject VERSION + build timestamp file into dist root.
+5. Smoke run (manual or scripted) to confirm window loads.
+6. Optionally produce onefile after stable.
+
+SECTION S. SIZE OPTIMIZATION
+- Exclude unused PyQt modules for web build if not needed (or remove PyQt entirely when deprecated GUI removed).
+- Avoid bundling tests directory in final exe.
+- Remove large unused assets; compress images.
+- Use UPX only if not causing runtime issues (optional).
+
+SECTION T. VERSIONING
+- VERSION file e.g. 0.4.0
+- CHANGELOG.md with Added / Changed / Fixed.
+- Bump rules: MAJOR (breaking API), MINOR (feature), PATCH (bug fix).
+- About panel shows version & build_time.
+
+SECTION U. CONTINUOUS INTEGRATION (OPTIONAL)
+- GitHub Actions: Windows runner → setup Python, pip install -r requirements, pytest, coverage upload, build exe artifact.
+- Tag-based release packaging.
+
+SECTION V. LEGACY PYQT DEPRECATION
+Phase steps:
+  1. Mark PyQt entry optional (legacy flag).
+  2. Document new default (web) in README.
+  3. After 2 minor versions: remove legacy_pyqt directory.
+  4. Remove PyQt dependency from requirements.
+
+SECTION W. DOCUMENTATION DELIVERABLES
+- README.md: Quick start & feature list.
+- ARCHITECTURE.md: component diagram + flow.
+- API_DOCS.md: js_api method signatures & schemas.
+- SETTINGS.md: keys, defaults, migration notes.
+- DEPLOY.md: build, packaging, signing.
+- CHANGELOG.md: version history.
+
+SECTION X. QUALITY GATES BEFORE RELEASE
+- All unit tests green.
+- Coverage threshold met.
+- Manual QA: Organizer dry run + commit on sample dataset; PDF merge tested.
+- Settings persist across restart.
+- No unhandled console exceptions.
+- Dist size within budget (< ~40 MB onedir, context-dependent).
+
+SECTION Y. HANDOVER CHECKLIST (FOR AGENTIC AI)
+1. Pull latest main.
+2. Read VERSION + CHANGELOG.
+3. Run: pip install -r requirements.txt (inside venv).
+4. Run tests: pytest -q.
+5. Run coverage (pytest --cov) if needed.
+6. Launch dev: python src/webview_bootstrap.py.
+7. Implement feature/fix in services/ or web/ only.
+8. Update docs & CHANGELOG.
+9. Bump VERSION if necessary.
+10. Build exe via scripts/build_webview.ps1.
+11. Attach artifact to release (if publishing).
+
+SECTION Z. FUTURE ROADMAP (OPTIONAL)
+- Real-time log streaming panel.
+- Drag-drop folder zone for Organizer & PDF list.
+- Theme toggle (dark/light) persisted.
+- Internationalization stub.
+- Migration to Tauri (smaller binary) evaluation.
+- Additional automation tools panel.
+- E2E tests with Playwright.
+
+EXECUTION ORDER (LINEAR SUMMARY)
+1. Harden services (D).
+2. Expand organizer details & error handling (M).
+3. Finalize js_api contract (E).
+4. Implement full external main.js logic (F).
+5. Settings persistence (I).
+6. Logging + tail API (K/J).
+7. Optional open_path API.
+8. Unit/API tests + coverage (P/Q).
+9. Refine build & packaging (R/S).
+10. Documentation suite (W).
+11. Remove legacy PyQt (V).
+12. Version bump + release (T/X).
+13. Handover (Y).
+
+RISK MITIGATION
+- Small, reviewable commits per step.
+- Avoid parallel refactor + feature in same diff.
+- Preserve API backwards compatibility (add, don’t remove fields; if removal required → major bump).
+- Maintain fallback HTML in bootstrap for missing index.html.
+
+END OF PLAN

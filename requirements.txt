@@ -1,0 +1,15 @@
+Flask>=2.2,<3
+PyQt5>=5.15.9,<6
+pandas>=2.0,<3
+numpy>=1.24,<3
+PyPDF2>=3.0,<4
+scikit-learn>=1.2,<2
+requests>=2.31,<3
+pytest>=7,<9
+pyinstaller>=6.1,<7
+pyinstaller-hooks-contrib>=2024.8
+fastapi>=0.110,<1
+uvicorn>=0.29,<1
+PyPDF2>=3.0.0
+pytest-cov>=4.1,<5
+pywebview>=4.4,<5
